@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:list_training/animated_list/custom_textfield.dart';
 
@@ -8,6 +9,7 @@ import 'data.dart';
 class MainPage extends StatefulWidget {
   final String? title;
 
+  // ignore: use_key_in_widget_constructors
   const MainPage({
     @required this.title,
   });
@@ -39,26 +41,25 @@ class _MainPageState extends State<MainPage> {
                     buildItem(Data.shoppingList[index], index),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    child: const Text(
-                      'Insert item',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    onPressed: () async {
-                      await showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => MyDialog());
-                      print("EEEE");
-                      print(Data.shoppingList.length);
-                      setState(() {});
-                    },
-                  ),
-                ],
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: ElevatedButton(
+                child: const Text(
+                  'Insert item',
+                  style: TextStyle(fontSize: 20),
+                ),
+                onPressed: () async {
+                  await showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => MyDialog());
+                  if (kDebugMode) {
+                    print("EEEE");
+                  }
+                  if (kDebugMode) {
+                    print(Data.shoppingList.length);
+                  }
+                  setState(() {});
+                },
               ),
             ),
           ],
@@ -78,13 +79,18 @@ class _MainPageState extends State<MainPage> {
                     index: index,
                     isUpdate: true,
                   ));
-          print("EEEE");
-          print(Data.shoppingList.length);
+          if (kDebugMode) {
+            print("EEEE");
+          }
+          if (kDebugMode) {
+            print(Data.shoppingList.length);
+          }
           setState(() {});
         },
       );
 }
 
+// ignore: must_be_immutable
 class MyDialog extends StatefulWidget {
   bool? isUpdate;
   int? index;
@@ -126,8 +132,12 @@ class _MyDialogState extends State<MyDialog> {
         ),
         TextButton(
           onPressed: () {
-            print(itemName!.text.toString());
-            print(itemUrl!.text.toString());
+            if (kDebugMode) {
+              print(itemName!.text.toString());
+            }
+            if (kDebugMode) {
+              print(itemUrl!.text.toString());
+            }
             if (widget.isUpdate == true) {
               Data.shoppingList[widget.index!] = ShoppingItem(
                   title: itemName!.text.toString(),
@@ -137,7 +147,9 @@ class _MyDialogState extends State<MyDialog> {
                   title: itemName!.text.toString(),
                   url: itemUrl!.text.toString()));
             }
-            print(Data.shoppingList.length);
+            if (kDebugMode) {
+              print(Data.shoppingList.length);
+            }
             Navigator.pop(context);
           },
           child: const Text('OK'),

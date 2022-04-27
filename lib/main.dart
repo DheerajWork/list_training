@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:list_training/animated_list/main_page.dart';
+import 'package:list_training/my_graph/my_graph.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
-      home: const MainPage(title: 'Animated List',),
+      home:  MyGraph(),
     );
   }
 }
